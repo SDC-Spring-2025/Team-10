@@ -5,12 +5,10 @@ export default function TabsLayout() {
   return (
     <Tabs>
       <Tabs.Screen name='index'
-        options={{ headerTitle: 'Index'}}
+        options={{ headerTitle: 'Welcome User'}}
       />
-      <Tabs.Screen name='about' 
-        options={{
-            headerTitle: 'About'
-        }}
+      <Tabs.Screen name='Summary' 
+        options={{headerTitle: 'Summary'}}
       />
     </Tabs>
   );

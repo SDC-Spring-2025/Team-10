@@ -5,16 +5,17 @@ import React from 'react';
 type Props = {
   label: string;
   theme: string;
+  onPress?: () => void;
 };
 
-export default function Button({ label, theme }: Props) {
+export default function Button({ label, theme, onPress }: Props) {
   if (theme === 'take_photo') {
     return (
       <View
         style={styles.buttonContainer}>
         <Pressable
           style={[styles.button, { backgroundColor: '#fff' }]}
-          onPress={() => alert('You pressed a button.')}>
+          onPress={onPress}>
           <FontAwesome name="camera" size={19} color="black" style={styles.buttonIcon} />
           <Text style={[styles.buttonLabel, { color: '#25292e' }]}>{label}</Text>
         </Pressable>
@@ -27,7 +28,7 @@ export default function Button({ label, theme }: Props) {
             style={styles.buttonContainer}>
             <Pressable 
                 style={[styles.button, { backgroundColor: '#fff' }]}
-                onPress={() => alert('You pressed a button.')}>
+                onPress={onPress}>
                 <FontAwesome name="picture-o" size={18} color="black" style={styles.buttonIcon} />
                 <Text style={[styles.buttonLabel, { color: '#25292e' }]}>{label}</Text>
             </Pressable>
@@ -40,7 +41,7 @@ export default function Button({ label, theme }: Props) {
             style={styles.buttonContainer}>
             <Pressable 
                 style={[styles.button, { backgroundColor: '#fff' }]}
-                onPress={() => alert('You pressed a button.')}>
+                onPress={onPress}>
                 <Text style={[styles.buttonLabel, { color: '#25292e' }]}>{label}</Text>
             </Pressable>
         </View>
