@@ -4,7 +4,7 @@ import React from 'react';
 
 type Props = {
   label: string;
-  theme: string;
+  theme?: string;
   onPress?: () => void;
 };
 

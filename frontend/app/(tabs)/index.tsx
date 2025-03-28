@@ -8,7 +8,6 @@ import { Image } from "expo-image";
 import * as ImagePicker from 'expo-image-picker';
 
 import { useRouter } from 'expo-router'
-import { Link } from "expo-router";
 
 export default function Index() {
 

@@ -7,7 +7,8 @@ export default function RootLayout() {
       <Stack.Screen name='(tabs)'
         options={{headerShown: false}}
       />
-      <Stack.Screen name='camera' options={{headerTitle:'Camera'}}/>
+      <Stack.Screen name='camera' 
+        options={{headerTitle: 'Camera'}}/>
     </Stack>
   );
 }
