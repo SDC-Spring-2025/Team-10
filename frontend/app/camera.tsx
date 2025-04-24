@@ -11,8 +11,10 @@ import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
 import React from "react";
+import { useRouter } from 'expo-router';
 
 export default function App() {
+  const router = useRouter();
   const [permission, requestPermission] = useCameraPermissions();
   const ref = useRef<CameraView>(null);
   const [uri, setUri] = useState<string | null>(null);
@@ -37,8 +39,14 @@ export default function App() {
 
   const takePicture = async () => {
     const photo = await ref.current?.takePictureAsync();
-    if(photo){
+    if(photo){  // if photo is taken, then post image in index page
       setUri(photo?.uri);
+      router.navigate({
+        pathname: "../", // navigate to previous page (go up one level in nav stack = index page)
+        params: { imageUri: photo.uri }
+      });
+
+      // TODO: send photo uri to backend
     }
   };
 

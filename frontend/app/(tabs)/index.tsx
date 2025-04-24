@@ -1,20 +1,26 @@
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import React from "react";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 import Button from "@/components/Button";
 
 import { Image } from "expo-image";
 import * as ImagePicker from 'expo-image-picker';
 
-import { useRouter } from 'expo-router'
+import { useRouter, useLocalSearchParams } from 'expo-router'
 
 export default function Index() {
-
   const router = useRouter();
+  const params = useLocalSearchParams();
 
   // Code for choosing photo from photo library
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (params.imageUri) {
+      setSelectedImage(params.imageUri as string);
+    }
+  }, [params.imageUri]);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -40,28 +46,28 @@ export default function Index() {
     router.navigate("../camera");
   }
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image source={selectedImage} style={styles.image} />
-      </View>
-      <View style={styles.footerContainer}>
-        <Button label="Take a photo" theme='take_photo' onPress={goToCamera}/>
-        <Button label="Choose a photo from library" theme='from_library' onPress={pickImageAsync}/>
-      </View>
-    </View>
+  return (    
+    <ScrollView style={styles.container} contentContainerStyle={{ alignItems: 'center' }}>
+        <View style={styles.footerContainer}>
+          <Button label="Take a photo" theme='take_photo' onPress={goToCamera}/>
+          <Button label="Choose a photo from library" theme='from_library' onPress={pickImageAsync}/>
+        </View>
+        <View style={styles.imageContainer}>
+          <Image source={selectedImage} style={styles.image} />
+        </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    backgroundColor: "#2E8B57"
+    backgroundColor: "#2E8B57",
   },
   imageContainer: {
     width: 320,
-    height: 400
+    height: 400,
+    backgroundColor: "red"
   },
   image: {
     width: 320,
